@@ -7,9 +7,11 @@
       "workspace": "~/.openclaw/workspace"
     }
   },
-  "providers": {
-    "moonshot": {
-      "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46"
+  "models": {
+    "providers": {
+      "moonshot": {
+        "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46"
+      }
     }
   },
   "channels": {
@@ -42,7 +44,8 @@
     }
   },
   "gateway": {
-    "bind": "0.0.0.0",
+    "mode": "local",
+    "bind": "loopback",
     "port": 18789
   }
 }
