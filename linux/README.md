@@ -8,13 +8,15 @@ This folder contains all the setup scripts and documentation for running OpenCla
 
 - ✅ `openclaw-config.example.json` - Example configuration (copy and customize)
 - ✅ `openclaw-config.json` - Your actual configuration (gitignored)
-- ✅ `fix-install.sh` - Fix npm installation issues
-- ✅ `setup-and-run.sh` - Automated installation script
+- ✅ `setup-and-run.sh` - Setup script (installs Feishu plugin & copies config)
 - ✅ `start-gateway.sh` - Start the OpenClaw gateway
+- ✅ `fix-install.sh` - Fix npm installation issues (if needed)
+- ✅ `README.md` - This file (quick reference)
 - ✅ `START_HERE.md` - **Main setup guide** (read this first!)
 - ✅ `QUICK_START.md` - Quick reference guide
 - ✅ `FEISHU_KIMI_SETUP.md` - Detailed Feishu setup documentation
 - ✅ `INSTALLATION_FIX.md` - Troubleshooting installation issues
+- ✅ `FOLDER_STRUCTURE.md` - Explains this folder organization
 
 ## 🔐 Before You Start
 
@@ -31,28 +33,29 @@ This folder contains all the setup scripts and documentation for running OpenCla
 
 **Note**: `openclaw-config.json` is gitignored to protect your credentials.
 
-## 🚀 Quick Start (4 Steps)
+## 🚀 Quick Start
 
 ### 0. Setup Configuration
 ```bash
+# Make sure you're in the linux/ directory
+cd linux/
+
+# Copy example config and edit with your credentials
 cp openclaw-config.example.json openclaw-config.json
-# Edit openclaw-config.json with your credentials
+nano openclaw-config.json  # or use vim/code
 ```
 
-### 1. Fix Installation Issues
-```bash
-./fix-install.sh
-```
-
-### 2. Run Setup
+### 1. Run Setup (installs Feishu plugin & copies config)
 ```bash
 ./setup-and-run.sh
 ```
 
-### 3. Start Gateway
+### 2. Start Gateway
 ```bash
 ./start-gateway.sh
 ```
+
+That's it! The script will check if OpenClaw is installed and only install what's missing.
 
 ## 📖 Full Instructions
 

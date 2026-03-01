@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # OpenClaw + Feishu + Kimi K2.5 Setup Script
-# This script will set up and run OpenClaw with your configuration
+# This script will set up OpenClaw with your configuration
 
 set -e
 
@@ -31,45 +31,57 @@ if ! command -v npm &> /dev/null; then
     exit 1
 fi
 
-echo "📦 Step 1: Installing OpenClaw..."
+echo "📦 Step 1: Checking OpenClaw installation..."
 
-# Check if openclaw is already installed
-if npm list -g openclaw &> /dev/null; then
-    echo "⚠️  OpenClaw is already installed. Removing old version..."
-    npm uninstall -g openclaw
-    echo "✅ Old version removed"
-fi
-
-# Clean npm cache to avoid ENOTEMPTY errors
-echo "🧹 Cleaning npm cache..."
-npm cache clean --force
-
-# Install OpenClaw
-npm install -g openclaw@latest
-
-if [ $? -ne 0 ]; then
-    echo ""
-    echo "❌ Installation failed. Running fix script..."
-    ./fix-install.sh
-    exit 1
+# Check if openclaw is installed
+if command -v openclaw &> /dev/null; then
+    OPENCLAW_VERSION=$(openclaw --version 2>/dev/null || echo "unknown")
+    echo "✅ OpenClaw is already installed: $OPENCLAW_VERSION"
+else
+    echo "⚠️  OpenClaw not found. Installing..."
+    npm install -g openclaw@latest
+    
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "❌ Installation failed. Please run: npm install -g openclaw@latest"
+        exit 1
+    fi
+    echo "✅ OpenClaw installed successfully"
 fi
 
 echo ""
 echo "📦 Step 2: Installing Feishu plugin..."
 
-# Check if feishu plugin is already installed
-if npm list -g @openclaw/feishu &> /dev/null; then
-    echo "⚠️  Feishu plugin is already installed. Removing old version..."
-    npm uninstall -g @openclaw/feishu
+# Check if feishu plugin is installed
+if npm list -g @openclaw/feishu &> /dev/null 2>&1; then
+    echo "✅ Feishu plugin is already installed"
+else
+    echo "⚠️  Feishu plugin not found. Installing..."
+    npm install -g @openclaw/feishu@latest
+    
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "❌ Installation failed. Please run: npm install -g @openclaw/feishu@latest"
+        exit 1
+    fi
+    echo "✅ Feishu plugin installed successfully"
 fi
-
-npm install -g @openclaw/feishu@latest
 
 echo ""
 echo "📁 Step 3: Setting up configuration..."
 
 # Create OpenClaw directory if it doesn't exist
 mkdir -p ~/.openclaw
+
+# Check if config file exists in current directory
+if [ ! -f "openclaw-config.json" ]; then
+    echo "❌ openclaw-config.json not found in current directory!"
+    echo ""
+    echo "Please create it from the example:"
+    echo "  cp openclaw-config.example.json openclaw-config.json"
+    echo "  # Then edit with your credentials"
+    exit 1
+fi
 
 # Copy the config file
 cp openclaw-config.json ~/.openclaw/openclaw.json
@@ -89,42 +101,27 @@ echo "=========================================="
 echo ""
 echo "1. Configure Feishu Bot Permissions:"
 echo "   - Go to: https://open.feishu.cn/app"
-echo "   - Open your app: cli_a92e8d2ca6219bd7"
-echo "   - Enable these permissions:"
-echo "     • im:message"
-echo "     • im:message.group_at_msg"
-echo "     • im:message.p2p_msg"
-echo "     • im:chat"
-echo "     • contact:user.base"
+echo "   - Open your app and enable required permissions"
+echo "   - See START_HERE.md for details"
 echo ""
-echo "2. Get Verification Token:"
-echo "   - In Feishu app → Event Subscriptions"
-echo "   - Copy the 'Verification Token'"
-echo "   - Add it to ~/.openclaw/openclaw.json:"
-echo "     \"verificationToken\": \"YOUR_TOKEN_HERE\""
-echo ""
-echo "3. Start OpenClaw Gateway:"
-echo "   Run: ./start-gateway.sh"
-echo ""
-echo "4. Expose webhook (choose one):"
+echo "2. Expose webhook (choose one):"
 echo ""
 echo "   Option A - Using ngrok (quick testing):"
 echo "     ngrok http 18790"
-echo "     Then use the ngrok URL in Feishu webhook settings"
 echo ""
 echo "   Option B - Using Tailscale (recommended):"
 echo "     tailscale funnel 18790"
 echo ""
-echo "   Option C - Public server:"
-echo "     Set up reverse proxy to localhost:18790"
+echo "3. Start OpenClaw Gateway:"
+echo "   ./start-gateway.sh"
 echo ""
-echo "5. Configure Feishu Webhook:"
+echo "4. Configure Feishu Webhook:"
 echo "   - Go to: https://open.feishu.cn/app"
 echo "   - Event Subscriptions → Request URL"
 echo "   - Enter: https://YOUR_URL/feishu/events"
 echo "   - Subscribe to: im.message.receive_v1"
 echo ""
-echo "6. Test your bot:"
+echo "5. Test your bot:"
 echo "   - Send a message to your bot in Feishu"
 echo "   - Approve pairing: openclaw pairing approve feishu <code>"
 echo "   - Chat with Kimi K2.5!"
