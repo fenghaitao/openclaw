@@ -1,0 +1,48 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5"
+      },
+      "workspace": "~/.openclaw/workspace"
+    }
+  },
+  "providers": {
+    "moonshot": {
+      "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46"
+    }
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "cli_a92e8d2ca6219bd7",
+      "appSecret": "YdzzG8nvSyQjKcTfGbblEdCSj5O1Y3aK",
+      "verificationToken": "axmGMeoZKziW7paZFwU2cgSARRl6BcgA",
+      "domain": "feishu",
+      "connectionMode": "webhook",
+      "webhookPath": "/feishu/events",
+      "webhookPort": 18790,
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "requireMention": true,
+      "allowFrom": [],
+      "groups": {
+        "*": {
+          "requireMention": true,
+          "enabled": true
+        }
+      },
+      "tools": {
+        "doc": true,
+        "chat": true,
+        "wiki": true,
+        "drive": true,
+        "perm": false
+      }
+    }
+  },
+  "gateway": {
+    "bind": "0.0.0.0",
+    "port": 18789
+  }
+}
