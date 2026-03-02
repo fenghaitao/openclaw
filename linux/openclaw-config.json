@@ -8,9 +8,30 @@
     }
   },
   "models": {
+    "mode": "merge",
     "providers": {
       "moonshot": {
-        "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46"
+        "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46",
+        "baseUrl": "https://api.moonshot.cn/v1",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5"
+          },
+          {
+            "id": "moonshot-v1-8k",
+            "name": "Moonshot V1 8K"
+          },
+          {
+            "id": "moonshot-v1-32k",
+            "name": "Moonshot V1 32K"
+          },
+          {
+            "id": "moonshot-v1-128k",
+            "name": "Moonshot V1 128K"
+          }
+        ]
       }
     }
   },
