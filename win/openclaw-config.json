@@ -1,0 +1,72 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5"
+      },
+      "workspace": "%USERPROFILE%\\.openclaw\\workspace"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "moonshot": {
+        "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46",
+        "baseUrl": "https://api.moonshot.cn/v1",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5"
+          },
+          {
+            "id": "moonshot-v1-8k",
+            "name": "Moonshot V1 8K"
+          },
+          {
+            "id": "moonshot-v1-32k",
+            "name": "Moonshot V1 32K"
+          },
+          {
+            "id": "moonshot-v1-128k",
+            "name": "Moonshot V1 128K"
+          }
+        ]
+      }
+    }
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "cli_a92e8d2ca6219bd7",
+      "appSecret": "YdzzG8nvSyQjKcTfGbblEdCSj5O1Y3aK",
+      "verificationToken": "axmGMeoZKziW7paZFwU2cgSARRl6BcgA",
+      "domain": "feishu",
+      "connectionMode": "webhook",
+      "webhookPath": "/feishu/events",
+      "webhookPort": 18790,
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "requireMention": true,
+      "allowFrom": [],
+      "groups": {
+        "*": {
+          "requireMention": true,
+          "enabled": true
+        }
+      },
+      "tools": {
+        "doc": true,
+        "chat": true,
+        "wiki": true,
+        "drive": true,
+        "perm": false
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "bind": "loopback",
+    "port": 18789
+  }
+}

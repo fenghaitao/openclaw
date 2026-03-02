@@ -1,0 +1,14 @@
+# Ignore configuration files with credentials
+openclaw-config.json
+
+# Ignore OpenClaw data directories
+.openclaw/
+workspace/
+
+# Ignore logs
+*.log
+logs/
+
+# Ignore temporary files
+*.tmp
+Thumbs.db
