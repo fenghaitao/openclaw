@@ -11,8 +11,8 @@ echo "Model: Kimi K2.5 (Moonshot)"
 echo "Channel: Feishu"
 echo ""
 echo "Gateway will listen on:"
-echo "  - Main: http://0.0.0.0:18789"
-echo "  - Webhook: http://0.0.0.0:18790/feishu/events"
+echo "  - Main: http://0.0.0.0:19999"
+echo "  - Webhook: http://0.0.0.0:20000/feishu/events"
 echo ""
 echo "Press Ctrl+C to stop"
 echo ""
@@ -20,4 +20,4 @@ echo "================================"
 echo ""
 
 # Start the gateway
-openclaw gateway run --bind 0.0.0.0 --port 18789 --verbose
+openclaw gateway run --bind lan --port 19999 --verbose

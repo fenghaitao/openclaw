@@ -1,18 +1,14 @@
 {
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "moonshot/kimi-k2.5"
-      },
-      "workspace": "~/.openclaw/workspace"
-    }
+  "meta": {
+    "lastTouchedVersion": "2026.2.27",
+    "lastTouchedAt": "2026-03-03T22:33:45.946Z"
   },
   "models": {
     "mode": "merge",
     "providers": {
       "moonshot": {
-        "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46",
         "baseUrl": "https://api.moonshot.cn/v1",
+        "apiKey": "sk-YOUR_MOONSHOT_API_KEY_HERE",
         "api": "openai-completions",
         "models": [
           {
@@ -35,6 +31,23 @@
       }
     }
   },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5"
+      },
+      "workspace": "~/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      }
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
   "channels": {
     "feishu": {
       "enabled": true,
@@ -44,7 +57,7 @@
       "domain": "feishu",
       "connectionMode": "webhook",
       "webhookPath": "/feishu/events",
-      "webhookPort": 18790,
+      "webhookPort": 20000,
       "dmPolicy": "pairing",
       "groupPolicy": "allowlist",
       "requireMention": true,
@@ -65,8 +78,22 @@
     }
   },
   "gateway": {
+    "port": 19999,
     "mode": "local",
     "bind": "loopback",
-    "port": 18789
+    "controlUi": {
+      "dangerouslyAllowHostHeaderOriginFallback": true
+    },
+    "auth": {
+      "mode": "token",
+      "token": "GENERATE_NEW_TOKEN_ON_FIRST_RUN"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "feishu": {
+        "enabled": true
+      }
+    }
   }
 }
