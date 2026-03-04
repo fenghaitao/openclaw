@@ -62,7 +62,25 @@
         "drive": true,
         "perm": false
       }
+    },
+    "msteams": {
+      "enabled": true,
+      "appId": "YOUR_AZURE_APP_ID_HERE",
+      "appPassword": "YOUR_AZURE_APP_PASSWORD_HERE",
+      "tenantId": "YOUR_AZURE_TENANT_ID_HERE",
+      "webhook": {
+        "port": 3978,
+        "path": "/api/messages"
+      },
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "requireMention": true,
+      "allowFrom": [],
+      "groupAllowFrom": []
     }
+  },
+  "plugins": {
+    "allow": ["msteams"]
   },
   "gateway": {
     "mode": "local",

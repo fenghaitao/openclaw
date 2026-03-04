@@ -3,6 +3,47 @@
   "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "f9f803b3-d1e4-489d-a6ac-42b796c2846e",
+  "webApplicationInfo": {
+    "id": "f9f803b3-d1e4-489d-a6ac-42b796c2846e"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "ChannelMessage.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelMessage.Send.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Member.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Owner.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelSettings.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamMember.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamSettings.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChatMessage.Read.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  },
   "packageName": "ai.openclaw.teams",
   "developer": {
     "name": "OpenClaw Bot",

@@ -77,7 +77,11 @@ export async function installPackageDir(params: {
   };
 
   try {
-    await fs.cp(params.sourceDir, params.targetDir, { recursive: true });
+    await fs.cp(params.sourceDir, params.targetDir, { 
+      recursive: true,
+      // Dereference symlinks on Windows to avoid EPERM errors (requires admin for symlinks)
+      verbatimSymlinks: false,
+    });
   } catch (err) {
     await rollback();
     return { ok: false, error: `${params.copyErrorPrefix}: ${String(err)}` };
