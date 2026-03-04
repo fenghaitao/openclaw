@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "f9f803b3-d1e4-489d-a6ac-42b796c2846e",
+  "packageName": "ai.openclaw.teams",
+  "developer": {
+    "name": "OpenClaw Bot",
+    "websiteUrl": "https://openclaw.ai",
+    "privacyUrl": "https://openclaw.ai/privacy",
+    "termsOfUseUrl": "https://openclaw.ai/terms"
+  },
+  "name": {
+    "short": "OpenClaw",
+    "full": "OpenClaw AI Assistant"
+  },
+  "description": {
+    "short": "AI assistant powered by OpenClaw",
+    "full": "OpenClaw is your personal AI assistant that helps with tasks, answers questions, and automates workflows."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "f9f803b3-d1e4-489d-a6ac-42b796c2846e",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": true,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "team",
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "help",
+              "description": "Get help with OpenClaw"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

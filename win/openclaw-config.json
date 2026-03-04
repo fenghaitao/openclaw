@@ -2,7 +2,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "moonshot/kimi-k2.5"
+        "primary": "github-copilot/gpt-4o"
       },
       "workspace": "%USERPROFILE%\\.openclaw\\workspace"
     }
@@ -11,7 +11,7 @@
     "mode": "merge",
     "providers": {
       "moonshot": {
-        "apiKey": "sk-IvY8rxTy6siwRRQBV2hsThJIdoFH78EiQmTNxJNuGj0sFi46",
+        "apiKey": "sk-hj2iF9n7iKGjhtZ8moScsSIlrAg81uqJ9HYYDK70G1avEjya",
         "baseUrl": "https://api.moonshot.cn/v1",
         "api": "openai-completions",
         "models": [

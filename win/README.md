@@ -1,109 +1,160 @@
-# 🦞 OpenClaw + Feishu + Kimi K2.5 Setup (Windows)
+# OpenClaw Windows Configuration
 
-**Location**: `win/` folder in this repository
+This directory contains the OpenClaw configuration for Windows systems.
 
-This folder contains all the setup scripts and documentation for running OpenClaw with Feishu and Kimi K2.5 on Windows.
+## Quick Start
 
-## 📁 Files in This Directory
+### Step 1: Copy Configuration to System
 
-- ✅ `openclaw-config.example.json` - Example configuration (copy and customize)
-- ✅ `openclaw-config.json` - Your actual configuration (gitignored)
-- ✅ `setup-and-run.ps1` - Setup script (installs Feishu plugin & copies config)
-- ✅ `start-gateway.ps1` - Start the OpenClaw gateway
-- ✅ `README.md` - This file (quick reference)
-- ✅ `START_HERE.md` - Beginner-friendly navigation guide
-- ✅ `FEISHU_KIMI_SETUP.md` - Detailed Feishu setup documentation
-- ✅ `QUICK_START.md` - Quick reference guide
-- ✅ `WINDOWS_NOTES.md` - Windows-specific tips and troubleshooting
-- ✅ `SETUP_SUMMARY.md` - Complete checklist and summary
+Choose one method:
 
-## 🔐 Before You Start
-
-1. Copy the example config:
-   ```powershell
-   Copy-Item openclaw-config.example.json openclaw-config.json
-   ```
-
-2. Edit `openclaw-config.json` with your credentials:
-   - Moonshot API key
-   - Feishu App ID
-   - Feishu App Secret
-   - Feishu Verification Token
-
-**Note**: `openclaw-config.json` is gitignored to protect your credentials.
-
-## 🚀 Quick Start (3 Steps)
-
-### 0. Setup Configuration
+#### Method A: Using PowerShell (Recommended)
 ```powershell
-# Make sure you're in the win/ directory
-cd win/
-
-# Copy example config and edit with your credentials
-Copy-Item openclaw-config.example.json openclaw-config.json
-notepad openclaw-config.json  # or use code/vim
+cd win
+.\copy-config.ps1
 ```
 
-### 1. Run Setup (installs Feishu plugin & copies config)
+#### Method B: Using Batch File
+```cmd
+cd win
+copy-config.bat
+```
+
+#### Method C: Manual Copy
+```powershell
+# Create directory
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.openclaw" -Force
+
+# Copy config
+Copy-Item "win\openclaw-config.json" "$env:USERPROFILE\.openclaw\openclaw.json"
+```
+
+### Step 2: Set GitHub Token
+
+The configuration uses `github-copilot/gpt-4o` as the primary model. You need to provide a GitHub token.
+
+#### Option A: Create .env file (Recommended)
+```powershell
+# Create .env file
+$envContent = "COPILOT_GITHUB_TOKEN=your_github_token_here"
+$envPath = Join-Path $env:USERPROFILE ".openclaw\.env"
+$envContent | Out-File -FilePath $envPath -Encoding UTF8
+```
+
+#### Option B: Set Environment Variable
+```powershell
+# Temporary (current session only)
+$env:COPILOT_GITHUB_TOKEN = "your_github_token_here"
+
+# Permanent (system-wide)
+[System.Environment]::SetEnvironmentVariable("COPILOT_GITHUB_TOKEN", "your_github_token_here", "User")
+```
+
+#### Option C: Use Interactive Login
+```bash
+openclaw models auth login-github-copilot
+```
+
+### Step 3: Start OpenClaw
+
+```bash
+openclaw gateway
+```
+
+Or use the provided startup script:
 ```powershell
 .\setup-and-run.ps1
 ```
 
-### 2. Start Gateway
-```powershell
-.\start-gateway.ps1
+## Configuration Details
+
+### Current Configuration
+
+- **Primary Model**: `github-copilot/gpt-4o`
+- **Workspace**: `%USERPROFILE%\.openclaw\workspace`
+- **Gateway Port**: 18789
+- **Gateway Bind**: loopback (127.0.0.1)
+
+### Channels Configured
+
+#### Feishu (Lark)
+- **Enabled**: Yes
+- **Connection Mode**: Webhook
+- **Webhook Port**: 18790
+- **DM Policy**: Pairing (requires approval for new contacts)
+- **Group Policy**: Allowlist with mention required
+
+### Additional Providers
+
+The configuration also includes Moonshot (Kimi) provider as a fallback:
+- Kimi K2.5
+- Moonshot V1 (8K, 32K, 128K variants)
+
+## File Locations
+
+After installation:
+
+- **Main Config**: `%USERPROFILE%\.openclaw\openclaw.json`
+- **Environment Variables**: `%USERPROFILE%\.openclaw\.env`
+- **Workspace**: `%USERPROFILE%\.openclaw\workspace`
+- **Credentials**: `%USERPROFILE%\.openclaw\credentials`
+- **Sessions**: `%USERPROFILE%\.openclaw\sessions`
+
+## Troubleshooting
+
+### Check Configuration
+```bash
+openclaw config get
 ```
 
-That's it! The script will check if OpenClaw is installed and only install what's missing.
+### Check Model Status
+```bash
+openclaw models status
+```
 
-## 📖 Full Instructions
-
-Read `FEISHU_KIMI_SETUP.md` for complete step-by-step instructions including:
-- Feishu bot configuration
-- Webhook setup with ngrok/Tailscale
-- Testing and troubleshooting
-- Security best practices
-
-## ⚡ Your Configuration
-
-- **Model**: Kimi K2.5 (Moonshot)
-- **Channel**: Feishu (飞书)
-- **DM Policy**: Pairing (users need approval)
-- **Platform**: Windows (PowerShell)
-
-## 🔧 Common Commands
-
-```powershell
-# Check status
+### Check Gateway Status
+```bash
 openclaw status
-
-# View logs
-openclaw logs --follow
-
-# List pairing requests
-openclaw pairing list
-
-# Approve user
-openclaw pairing approve feishu <code>
-
-# Test Kimi K2.5
-openclaw agent --message "你好"
 ```
 
-## 🆘 Need Help?
+### View Logs
+```bash
+openclaw logs
+```
 
-1. **Setup questions**: Read `START_HERE.md`
-2. **Detailed docs**: Read `FEISHU_KIMI_SETUP.md`
-3. **PowerShell execution policy**: Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+### Test GitHub Copilot Connection
+```bash
+# This will show if your token is working
+openclaw models status
+```
 
-## 🔐 Security Note
+## Getting a GitHub Token
 
-Your credentials are in `openclaw-config.json`, which is gitignored. Never commit this file to version control!
+1. Go to https://github.com/settings/tokens
+2. Click "Generate new token" → "Generate new token (classic)"
+3. Give it a name (e.g., "OpenClaw Copilot")
+4. Select scope: `read:user` (minimum required)
+5. Click "Generate token"
+6. Copy the token (starts with `ghp_` or `github_pat_`)
 
-To share this setup:
-1. Commit everything except `openclaw-config.json`
-2. Others can copy `openclaw-config.example.json` and add their own credentials
+## Security Notes
 
----
+- The configuration file contains API keys and tokens
+- Keep `openclaw-config.json` secure and don't commit it to public repositories
+- The `.env` file is automatically ignored by git
+- Tokens are stored in `%USERPROFILE%\.openclaw\credentials` with restricted permissions
 
-**Ready?** Start with: `.\setup-and-run.ps1`
+## Support
+
+- Documentation: https://docs.openclaw.ai
+- GitHub: https://github.com/openclaw/openclaw
+- Discord: https://discord.gg/clawd
+
+## Next Steps
+
+After setup:
+
+1. Test the connection: `openclaw status`
+2. Send a test message through Feishu
+3. Check the logs if something doesn't work: `openclaw logs`
+4. Read the docs for advanced configuration: https://docs.openclaw.ai
