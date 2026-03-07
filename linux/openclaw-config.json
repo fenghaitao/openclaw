@@ -48,6 +48,19 @@
       "webhookPort": 20000,
       "dmPolicy": "pairing",
       "groupPolicy": "open"
+    },
+    "msteams": {
+      "enabled": true,
+      "appId": "f9f803b3-d1e4-489d-a6ac-42b796c2846e",
+      "appPassword": "YOUR_MSTEAMS_APP_PASSWORD",
+      "tenantId": "f6995bd1-4340-4351-81e7-0b18e45853a2",
+      "webhook": {
+        "port": 3978,
+        "path": "/api/messages"
+      },
+      "dmPolicy": "open",
+      "groupPolicy": "open",
+      "allowFrom": ["*"]
     }
   },
   "gateway": {
@@ -62,6 +75,9 @@
   "plugins": {
     "entries": {
       "feishu": {
+        "enabled": true
+      },
+      "msteams": {
         "enabled": true
       }
     }
