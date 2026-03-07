@@ -20,4 +20,4 @@ echo "================================"
 echo ""
 
 # Start the gateway
-openclaw gateway run --bind lan --port 19999 --verbose
+openclaw gateway run --bind loopback --port 19999 --verbose
