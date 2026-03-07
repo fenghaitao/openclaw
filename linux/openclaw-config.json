@@ -1,14 +1,14 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.2.27",
-    "lastTouchedAt": "2026-03-07T04:49:54.348Z"
+    "lastTouchedVersion": "2026.3.2",
+    "lastTouchedAt": "2026-03-07T08:32:30.443Z"
   },
   "models": {
     "mode": "merge",
     "providers": {
       "moonshot": {
         "baseUrl": "https://api.moonshot.cn/v1",
-        "apiKey": "sk-YOUR_MOONSHOT_API_KEY_HERE",
+        "apiKey": "YOUR_MOONSHOT_API_KEY_HERE",
         "api": "openai-completions",
         "models": [
           {
@@ -22,7 +22,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "moonshot/kimi-k2.5"
+        "primary": "github-copilot/gpt-4o"
       },
       "workspace": "~/.openclaw/workspace",
       "compaction": {
@@ -37,6 +37,19 @@
     "ownerDisplay": "raw"
   },
   "channels": {
+    "msteams": {
+      "enabled": true,
+      "appId": "f9f803b3-d1e4-489d-a6ac-42b796c2846e",
+      "appPassword": "YOUR_AZURE_APP_PASSWORD_HERE",
+      "tenantId": "f6995bd1-4340-4351-81e7-0b18e45853a2",
+      "webhook": {
+        "port": 3978,
+        "path": "/api/messages"
+      },
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
+      "groupPolicy": "open"
+    },
     "feishu": {
       "enabled": true,
       "appId": "cli_a92e8d2ca6219bd7",
@@ -48,19 +61,6 @@
       "webhookPort": 20000,
       "dmPolicy": "pairing",
       "groupPolicy": "open"
-    },
-    "msteams": {
-      "enabled": true,
-      "appId": "f9f803b3-d1e4-489d-a6ac-42b796c2846e",
-      "appPassword": "YOUR_MSTEAMS_APP_PASSWORD",
-      "tenantId": "f6995bd1-4340-4351-81e7-0b18e45853a2",
-      "webhook": {
-        "port": 3978,
-        "path": "/api/messages"
-      },
-      "dmPolicy": "open",
-      "groupPolicy": "open",
-      "allowFrom": ["*"]
     }
   },
   "gateway": {
@@ -69,7 +69,7 @@
     "bind": "loopback",
     "auth": {
       "mode": "token",
-      "token": "62ab6f00e5860b48abbe18ccac9d35c3899654fc993c2df4"
+      "token": "YOUR_GATEWAY_TOKEN_HERE"
     }
   },
   "plugins": {
