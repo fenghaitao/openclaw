@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.2.27",
-    "lastTouchedAt": "2026-03-03T22:33:45.946Z"
+    "lastTouchedAt": "2026-03-07T04:49:54.348Z"
   },
   "models": {
     "mode": "merge",
@@ -14,18 +14,6 @@
           {
             "id": "kimi-k2.5",
             "name": "Kimi K2.5"
-          },
-          {
-            "id": "moonshot-v1-8k",
-            "name": "Moonshot V1 8K"
-          },
-          {
-            "id": "moonshot-v1-32k",
-            "name": "Moonshot V1 32K"
-          },
-          {
-            "id": "moonshot-v1-128k",
-            "name": "Moonshot V1 128K"
           }
         ]
       }
@@ -52,41 +40,23 @@
     "feishu": {
       "enabled": true,
       "appId": "cli_a92e8d2ca6219bd7",
-      "appSecret": "YdzzG8nvSyQjKcTfGbblEdCSj5O1Y3aK",
-      "verificationToken": "axmGMeoZKziW7paZFwU2cgSARRl6BcgA",
+      "appSecret": "YOUR_FEISHU_APP_SECRET",
+      "verificationToken": "YOUR_FEISHU_VERIFICATION_TOKEN",
       "domain": "feishu",
       "connectionMode": "webhook",
       "webhookPath": "/feishu/events",
       "webhookPort": 20000,
       "dmPolicy": "pairing",
-      "groupPolicy": "allowlist",
-      "requireMention": true,
-      "allowFrom": [],
-      "groups": {
-        "*": {
-          "requireMention": true,
-          "enabled": true
-        }
-      },
-      "tools": {
-        "doc": true,
-        "chat": true,
-        "wiki": true,
-        "drive": true,
-        "perm": false
-      }
+      "groupPolicy": "open"
     }
   },
   "gateway": {
     "port": 19999,
     "mode": "local",
     "bind": "loopback",
-    "controlUi": {
-      "dangerouslyAllowHostHeaderOriginFallback": true
-    },
     "auth": {
       "mode": "token",
-      "token": "GENERATE_NEW_TOKEN_ON_FIRST_RUN"
+      "token": "62ab6f00e5860b48abbe18ccac9d35c3899654fc993c2df4"
     }
   },
   "plugins": {
