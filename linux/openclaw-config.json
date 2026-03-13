@@ -27,7 +27,16 @@
       "workspace": "~/.openclaw/workspace",
       "compaction": {
         "mode": "safeguard"
+      },
+      "subagents": {
+        "maxSpawnDepth": 2
       }
+    }
+  },
+  "skills": {
+    "load": {
+      "watch": true,
+      "watchDebounceMs": 300
     }
   },
   "commands": {
@@ -67,6 +76,13 @@
     "port": 19999,
     "mode": "local",
     "bind": "loopback",
+    "controlUi": {
+      "allowedOrigins": [
+        "http://localhost:19999",
+        "http://127.0.0.1:19999",
+        "http://20.215.200.49:19999"
+      ]
+    },
     "auth": {
       "mode": "token",
       "token": "YOUR_GATEWAY_TOKEN_HERE"
