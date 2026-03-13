@@ -70,8 +70,7 @@
     "auth": {
       "mode": "token",
       "token": "YOUR_GATEWAY_TOKEN_HERE"
-    },
-    "hotPlug": true
+    }
   },
   "plugins": {
     "entries": {
