@@ -11,16 +11,10 @@ echo "Model: GitHub Copilot GPT-4o"
 echo "Channels: Feishu + MS Teams"
 echo ""
 
-# Configure gateway for LAN access
-echo "⚙️  Configuring gateway for LAN access..."
-openclaw config set gateway.bind lan 2>/dev/null || true
+# Configure gateway for loopback access
+echo "⚙️  Configuring gateway for loopback access..."
+openclaw config set gateway.bind loopback 2>/dev/null || true
 
-# Add public IP to allowed origins
-PUBLIC_IP=$(curl -s ifconfig.me 2>/dev/null || echo "")
-if [ -n "$PUBLIC_IP" ]; then
-    echo "⚙️  Adding http://$PUBLIC_IP:19999 to allowed origins..."
-    openclaw config set gateway.controlUi.allowedOrigins "[\"http://localhost:19999\",\"http://127.0.0.1:19999\",\"http://$PUBLIC_IP:19999\"]" 2>/dev/null || true
-fi
 echo ""
 
 # Start Tailscale Funnel for MS Teams (port 3978)
@@ -67,9 +61,9 @@ echo "🔐 Authentication:"
 echo "Gateway token: $(openclaw config get gateway.auth.token 2>/dev/null || echo 'Token not found')"
 echo ""
 echo "🌐 Access via SSH Tunnel (Recommended):"
-echo "  ssh -L 19999:localhost:19999 $USER@$PUBLIC_IP"
+echo "  ssh -L 19999:localhost:19999 $USER@<server>"
 echo "  Then open: http://localhost:19999"
 echo ""
 
 # Start the gateway with increased heap size
-NODE_OPTIONS="--max-old-space-size=3072" openclaw gateway run --bind lan --port 19999 --verbose
+NODE_OPTIONS="--max-old-space-size=3072" openclaw gateway run --bind loopback --port 19999 --verbose
