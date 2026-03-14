@@ -39,11 +39,11 @@ tailscale serve reset 2>/dev/null || true
 sleep 2
 
 # Verify all stopped
-REMAINING=$(ps aux | grep -E "openclaw|ngrok" | grep -v grep | wc -l)
+REMAINING=$(ps aux | grep -E "openclaw-gateway|openclaw gateway| ngrok " | grep -v grep | wc -l)
 if [ "$REMAINING" -eq 0 ]; then
   echo "✅ All processes stopped successfully"
   free -h
 else
   echo "⚠️  Warning: $REMAINING process(es) still running:"
-  ps aux | grep -E "openclaw|ngrok" | grep -v grep
+  ps aux | grep -E "openclaw-gateway|openclaw gateway| ngrok " | grep -v grep
 fi
