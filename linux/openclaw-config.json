@@ -62,11 +62,8 @@
       "enabled": true,
       "appId": "cli_a92e8d2ca6219bd7",
       "appSecret": "YOUR_FEISHU_APP_SECRET",
-      "verificationToken": "YOUR_FEISHU_VERIFICATION_TOKEN",
       "domain": "feishu",
-      "connectionMode": "webhook",
-      "webhookPath": "/feishu/events",
-      "webhookPort": 20000,
+      "connectionMode": "websocket",
       "dmPolicy": "pairing",
       "groupPolicy": "open"
     },
