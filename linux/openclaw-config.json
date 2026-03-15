@@ -78,6 +78,14 @@
       "separateSessionByConversation": true,
       "groupSessionScope": "group",
       "asyncMode": false
+    },
+    "wecom": {
+      "enabled": true,
+      "botId": "YOUR_WECOM_BOT_ID",
+      "secret": "YOUR_WECOM_SECRET",
+      "dmPolicy": "open",
+      "groupPolicy": "open",
+      "sendThinkingMessage": true
     }
   },
   "gateway": {
@@ -118,6 +126,9 @@
         "enabled": true
       },
       "dingtalk-connector": {
+        "enabled": true
+      },
+      "wecom-openclaw-plugin": {
         "enabled": true
       }
     }
