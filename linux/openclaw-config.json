@@ -118,6 +118,7 @@
     }
   },
   "plugins": {
+    "allow": ["wecom-openclaw-plugin", "dingtalk-connector", "feishu", "msteams"],
     "entries": {
       "feishu": {
         "enabled": true
