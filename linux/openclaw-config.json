@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.2",
-    "lastTouchedAt": "2026-03-07T08:32:30.443Z"
+    "lastTouchedAt": "2026-03-15T00:01:58.861Z"
   },
   "models": {
     "mode": "merge",
@@ -33,22 +33,16 @@
       }
     }
   },
-  "skills": {
-    "load": {
-      "watch": true,
-      "watchDebounceMs": 300
-    }
-  },
-  "session": {
-    "threadBindings": {
-      "enabled": true
-    }
-  },
   "commands": {
     "native": "auto",
     "nativeSkills": "auto",
     "restart": true,
     "ownerDisplay": "raw"
+  },
+  "session": {
+    "threadBindings": {
+      "enabled": true
+    }
   },
   "channels": {
     "msteams": {
@@ -75,12 +69,28 @@
       "webhookPort": 20000,
       "dmPolicy": "pairing",
       "groupPolicy": "open"
+    },
+    "dingtalk-connector": {
+      "enabled": true,
+      "clientId": "YOUR_DINGTALK_CLIENT_ID",
+      "clientSecret": "YOUR_DINGTALK_CLIENT_SECRET",
+      "gatewayToken": "YOUR_GATEWAY_TOKEN_HERE",
+      "separateSessionByConversation": true,
+      "groupSessionScope": "group",
+      "asyncMode": false
     }
   },
   "gateway": {
     "port": 19999,
     "mode": "local",
     "bind": "loopback",
+    "http": {
+      "endpoints": {
+        "chatCompletions": {
+          "enabled": true
+        }
+      }
+    },
     "controlUi": {
       "allowedOrigins": [
         "http://localhost:19999",
@@ -93,12 +103,21 @@
       "token": "YOUR_GATEWAY_TOKEN_HERE"
     }
   },
+  "skills": {
+    "load": {
+      "watch": true,
+      "watchDebounceMs": 300
+    }
+  },
   "plugins": {
     "entries": {
       "feishu": {
         "enabled": true
       },
       "msteams": {
+        "enabled": true
+      },
+      "dingtalk-connector": {
         "enabled": true
       }
     }
